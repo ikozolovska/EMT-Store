@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:axon="http://www.axonframework.org/schema/core"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.axonframework.org/schema/core http://www.axonframework.org/schema/axon-core.xsd">
+
+    <bean class="org.axonframework.samples.trader.category.command.CategoryCommandHandler">
+        <property name="repository" ref="categoryRepository"/>
+    </bean>
+
+    <axon:event-sourcing-repository id="categoryRepository"
+                                    aggregate-type="org.axonframework.samples.trader.category.command.Category"
+                                    cache-ref="ehcache"
+                                    event-bus="eventBus"
+                                    event-store="eventStore">
+        <axon:snapshotter-trigger event-count-threshold="50" snapshotter-ref="snapshotter"/>
+    </axon:event-sourcing-repository>
+
+</beans>

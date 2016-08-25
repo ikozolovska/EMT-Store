@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome to the axon trader</title>
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<nav th:include="fragments/navigation :: navigation"></nav>
+
+<div class="container">
+   <div class="row">
+        <div class="col-sm-3">
+            <ul class="nav nav-pills nav-stacked" th:include="fragments/sidemenu :: navpills"></ul>
+        </div>
+
+        <div class="col-sm-9">
+                <div class="col-sm-6">
+                    <img class="img-responsive" th:src="@{/product/{id}/picture(id=${product.identifier})}" th:alt="${product.productName}"/>
+                </div>
+
+                <div class="col-sm-6">
+                    <div th:text="${product.productName}" class="product-title"></div>
+                    <div th:text="${product.productDescription}" class="product-desc"></div>
+                    <div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> </div>
+                    <hr>
+                    <div class="product-price">$ <span th:text="${product.productPrice}" ></span></div>
+                    <div th:text="${product.productAvailability}"  class="product-stock"></div>
+                    <hr>
+                    <form th:action="@{/product/addToCart/{id}(id=${product.identifier})}" method="post">
+                        <input type="number" class="form-control" name="quantity" min="1">
+                        <div class="btn-group cart">
+                                <button type="submit" class="btn btn-success">
+                                    Add to cart
+                                </button>
+                        </div>
+                    </form>
+                    <form th:action="@{/product/addToWishList/{id}(id=${product.identifier})}" method="post">
+                        <div class="btn-group wishList">
+                            <button type="submit" class="btn btn-danger">
+                                Add to wishList
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-sm-12">
+                    <hr>
+                    <!-- the comment box -->
+                    <div class="well">
+                        <h4><i class="fa fa-paper-plane-o"></i> Leave a Comment:</h4>
+                        <form role="form">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-reply"></i> Submit</button>
+                        </form>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- jQuery -->
+<script src="../../js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../../js/bootstrap.min.js"></script>
+
+</body>
+</html>

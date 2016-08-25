@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>KI</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <div class="row">
+                <div class="col-md-12" th:each="order : ${orders}">
+                    <fieldset class="form-group" th:each="lineItem : ${order.lineItemEntryList}">
+                        <label for="productId">Product id: </label>
+                        <label id="productId" th:text="${lineItem.productId}"></label>
+                        <label for="productQty">Product quantity: </label>
+                        <label id="productQty" th:text="${lineItem.productQuantity}"></label>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="firstName">First Name: </label>
+                        <label id="firstName" th:text="${order.orderInfoDTOEntry.firstName}"></label>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="lastName">Last Name: </label>
+                        <label id="lastName" th:text="${order.orderInfoDTOEntry.lastName}"></label>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="shipTo">Ship To: </label>
+                        <label id="shipTo" th:text="${order.orderInfoDTOEntry.shipToCity}"></label>
+                    </fieldset>
+                    <hr/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- /.container -->
+
+<div class="container">
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; FINKI 2015</p>
+            </div>
+        </div>
+    </footer>
+
+</div>
+<!-- /.container -->
+
+<<!-- jQuery -->
+<script src="../../../js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../../../js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<!-- Bootstrap Core CSS -->
+<link href="../../../css/bootstrap.min.css" rel="stylesheet">
+
+
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" th:fragment="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" th:href="@{/}">EMT-Store</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="glyphicon glyphicon-user"></span>
+                            <span sec:authorize="isAnonymous()">Account</span>
+                            <span sec:authorize="isAuthenticated()" sec:authentication="principal.firstName"></span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li sec:authorize="isAnonymous()" >
+                                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Login</button>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li sec:authorize="isAuthenticated()">
+                                <a th:href="@{/user/orders}" class="btn btn-success btn-block">Orders</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li sec:authorize="isAuthenticated()">
+                                <form name="f" th:action="@{/j_spring_security_logout}" method="post" class="log-page">
+                                    <button type="submit" class="btn btn-warning btn-block">logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a th:href="@{/cart/view}">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            Cart
+                        </a>
+                    </li>
+                </ul>
+
+                <form class="navbar-form" method="get" th:action="@{/search}">
+                    <div class="form-group" style="display:inline;">
+                        <div class="input-group" style="display:table;">
+                            <input class="form-control" name="queryString" placeholder="Search Here" autocomplete="off" type="text">
+                            <span class="input-group-btn" style="width:1%;">
+                                <button class="btn btn-warning" type="button">
+
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+
+
+                <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form name="f" th:action="@{/j_spring_security_check}" method="post" class="log-page form-horizontal">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">Login</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div th:if="${loginError}" th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}" class="alert alert-error">
+                                        Bad user or password.<br/>
+                                        Cause: <span th:text="${errorMsg}">Wrong input!</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username" class="col-sm-2 control-label">Username: </label>
+                                        <div class="col-sm-10">
+                                            <input name="j_username" id="username" class="form-control" type="text" placeholder="Username" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="col-sm-2 control-label">Password: </label>
+                                        <div class="col-sm-10">
+                                            <input name="j_password" id="password" class="form-control" type="password" placeholder="Password" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="_spring_security_remember_me"> Remember me
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                </div>
+                            </form>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <!-- jQuery -->
+    <script src="../../../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../../js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
+
+
+

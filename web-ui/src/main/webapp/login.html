@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<body>
+
+
+<div th:with="ctx=${pageContext.request.contextPath}"></div>
+
+    <ul class="nav">
+        <li><a href="${ctx}/">Home</a></li>
+        <li><a href="${ctx}/product">Products</a></li>
+        <li><a href="${ctx}/dashboard">Dashboard</a></li>
+        <li><a href="${ctx}/company">Companies</a></li>
+        <li><a href="${ctx}/data/collections">Data</a></li>
+        <li><a href="${ctx}/admin/portfolio">Portfolio</a></li>
+    </ul>
+
+
+        <div class="container">
+            <ul class="loginbar pull-right">
+                <li sec:authorize="isAnonymous()">
+                 <!--   <form name="f" th:action="@{/j_spring_security_check}" method="post" class="log-page">
+                        <h3>Login</h3>
+                        <div th:if="${loginError}" th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}" class="alert alert-error">
+                            Bad user or password.<br/>
+                            Cause: <span th:text="${errorMsg}">Wrong input!</span>
+                        </div>
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-user"></i></span>
+                            <input name="j_username" class="input-xlarge" type="text" placeholder="Username" />
+                        </div>
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-lock"></i></span>
+                            <input name="j_password" class="input-xlarge" type="password" placeholder="Password" />
+                        </div>
+                        <div class="controls form-inline">
+                            <button class="btn-u pull-right" type="submit">Login</button>
+                        </div>
+                    </form>
+                    -->
+
+
+                    <form name="f" th:action="@{/j_spring_security_check}" method="POST" class="form-stacked">
+                        <fieldset>
+                            <legend>Login to get access</legend>
+                            <div class="clearfix">
+                                <label for="j_username">Username</label>
+
+                                <div class="input">
+                                    <input type='text' id="j_username" name='j_username'/>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <label for="j_password">Password</label>
+
+                                <div class="input">
+                                    <input type='password' id="j_password" name='j_password'/>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <label>
+                                    <input type="checkbox" name="_spring_security_remember_me">
+                                    <span>Don't ask for my password for two weeks</span>
+                                </label>
+                            </div>
+                            <div class="actions">
+                                <input name="submit" type="submit" class="btn primary">
+                                <input name="reset" type="reset" class="btn">
+                            </div>
+                        </fieldset>
+                    </form>
+                </li>
+            </ul>
+        </div>
+
+
+</body>
+</html>

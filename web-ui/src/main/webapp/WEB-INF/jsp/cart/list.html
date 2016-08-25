@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>KI</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="../../../fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+<nav th:include="fragments/navigation :: navigation"></nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <ul class="nav nav-pills nav-stacked" th:include="fragments/sidemenu :: navpills"></ul>
+        </div>
+        <div class="col-sm-9 col-md-9 col-lg-9">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Product</th>
+					<th class="text-center">Price</th>
+                    <th>Quantity</th>
+                    <th class="text-center">Subtotal</th>
+                    <th> </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="item : ${items}">
+                    <td class="col-md-6">
+                        <div class="media">
+                            <a class=" pull-left" th:href="@{/product/{id}(id=${item.productEntry.identifier})}">
+                                <img class="media-object" th:src="@{/product/{id}/picture(id=${item.productEntry.identifier})}" th:alt="${item.productEntry.productName}" style="width: 100px; height: 100px;">
+                            </a>
+                            <div class="media-body">
+                                  <h4 class="media-heading">
+                                      <a th:text="${item.productEntry.productName}" th:href="@{/product/{id}(id=${item.productEntry.identifier})}"></a>
+                                  </h4>
+                                 <p></p>
+                             </div>
+                         </div></td>
+                     <td class="col-md-1 text-center"><br><strong>$</strong><strong th:text="${item.productEntry.productPrice}"></strong></td>
+                     <td class="col-md-1" style="text-align: center">
+                         <br>
+                     <form th:action="@{/cart/updateLineItemQuantity/{id}(id=${item.productEntry.identifier})}" method="post">
+                         <button type="submit" name="action" value="decrease"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                         <input type="text" name="quantity" th:value="${item.lineItemEntry.productQuantity}">
+                         <button type="submit" name="action" value="increase"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                     </form>
+                     </td>
+                     <td class="col-md-1 text-center"><br><strong>0</strong></td>
+                     <td class="col-md-1">
+                         <br>
+                         <form th:action="@{/cart/removeFromCart}" method="post">
+                            <input type="hidden" id="productId" name="productId" th:value="${item.productEntry.identifier}"></imput>
+                            <button type="submit" class="btn btn-danger  active" role="button"><span class="glyphicon glyphicon-trash"></span></button>
+                         </form>
+                 </tr>
+
+
+
+                 <tr>
+                     <td>
+                         <button th:action="@{/}" type="button" class="btn btn-warning">
+                             <span class="glyphicon glyphicon-chevron-left"></span> Continue Shopping
+                         </button></td>
+                     </td>
+                     <td>   </td>
+                     <td>   </td>
+                     <td >
+                        <strong> Total&nbsp$9.98</strong>
+                     <td>
+                         <button type="button" class="btn btn-success">
+                             Checkout <span class="glyphicon glyphicon-play"></span>
+                         </button></td>
+                        <a th:href="@{/order/payment}" class="btn btn-success">Proceed to checkout</a>
+                 </tr>
+                 </tbody>
+             </table>
+         </div>
+
+     </div>
+ </div>
+ <!-- jQuery -->
+<script src="../../../js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../../../js/bootstrap.min.js"></script>
+
+</body>
+</html>

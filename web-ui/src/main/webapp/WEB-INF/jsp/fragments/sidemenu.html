@@ -1,0 +1,41 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<!-- Bootstrap Core CSS -->
+<link href="../../../css/bootstrap.min.css" rel="stylesheet">
+
+
+
+<body>
+
+
+<ul class="nav nav-pills nav-stacked" th:fragment="navpills">
+
+    <li th:each="mainCategory : ${mainCategories}" role="presentation" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <span th:text="${mainCategory.categoryName}"></span>
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li th:each="subCategory : ${subCategories}" th:if="${mainCategory.identifier} == ${subCategory.parentCategory}">
+                <a th:href="@{/category/{id}(id=${subCategory.identifier})}" th:text="${subCategory.categoryName}"></a>
+            </li>
+        </ul>
+    </li>
+
+</ul>
+
+<!-- jQuery -->
+<script src="../../../js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../../../js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
+
+
+
