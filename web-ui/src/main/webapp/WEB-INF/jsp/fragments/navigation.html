@@ -39,11 +39,20 @@
                                 <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Login</button>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Action</a></li>
+                            <li sec:authorize="isAnonymous()">
+                                <a th:href="@{/user/addNewUser}">Register</a>
+                            </li>
+                            <li sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a th:href="@{/category/addNewCategory}">Add category</a>
+                            </li>
+                            <li sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a th:href="@{/product/addNewProduct}">Add product</a>
+                            </li>
                             <li><a href="#">Another action</a></li>
                             <li sec:authorize="isAuthenticated()">
                                 <a th:href="@{/user/orders}" class="btn btn-success btn-block">Orders</a>
                             </li>
+                            <li><a href="#">Another action</a></li>
                             <li role="separator" class="divider"></li>
                             <li sec:authorize="isAuthenticated()">
                                 <form name="f" th:action="@{/j_spring_security_logout}" method="post" class="log-page">
