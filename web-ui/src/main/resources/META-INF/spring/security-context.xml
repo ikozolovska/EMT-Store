@@ -48,7 +48,7 @@
         <intercept-url pattern="/product/addNewProduct" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/rest/product" method="POST" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/**" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')"/>
-        <form-login login-page="/login.jsp" authentication-failure-url="/login.html?login_error=1"/>
+        <form-login login-page="/login.html" authentication-failure-url="/login.html?login_error=1"/>
         <logout logout-success-url="/"/>
     </http>
 

@@ -13,6 +13,9 @@
     <!-- Bootstrap Core CSS -->
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- CSS -->
+    <link href="../../../css/main.css" rel="stylesheet" >
+
     <!-- Fonts -->
     <link href="../../../fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -55,10 +58,10 @@
                      <td class="col-md-1 text-center"><br><strong>$</strong><strong th:text="${item.productEntry.productPrice}"></strong></td>
                      <td class="col-md-1" style="text-align: center">
                          <br>
-                     <form th:action="@{/cart/updateLineItemQuantity/{id}(id=${item.productEntry.identifier})}" method="post">
-                         <button type="submit" name="action" value="decrease"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                         <input type="text" name="quantity" th:value="${item.lineItemEntry.productQuantity}">
-                         <button type="submit" name="action" value="increase"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                     <form id="quantity_form" th:action="@{/cart/updateLineItemQuantity/{id}(id=${item.productEntry.identifier})}" method="post">
+                         <button id="btn_minus" type="submit" name="action" value="decrease"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                         <input id="quantity_input" type="text" name="quantity" th:value="${item.lineItemEntry.productQuantity}">
+                         <button id="btn_plus" type="submit" name="action" value="increase"><i class="fa fa-plus" aria-hidden="true"></i></button>
                      </form>
                      </td>
                      <td class="col-md-1 text-center"><br><strong>0</strong></td>
@@ -74,19 +77,22 @@
 
                  <tr>
                      <td>
-                         <button th:action="@{/}" type="button" class="btn btn-warning">
+                         <a th:href="@{/}" class="btn btn-warning">
                              <span class="glyphicon glyphicon-chevron-left"></span> Continue Shopping
-                         </button></td>
+                         </a></td>
                      </td>
                      <td>   </td>
                      <td>   </td>
                      <td >
                         <strong> Total&nbsp$9.98</strong>
                      <td>
-                         <button type="button" class="btn btn-success">
+                         <!--button type="button" class="btn btn-success">
                              Checkout <span class="glyphicon glyphicon-play"></span>
-                         </button></td>
-                        <a th:href="@{/order/payment}" class="btn btn-success">Proceed to checkout</a>
+                         </button-->
+                     <a th:href="@{/order/payment}" class="btn btn-success">Checkout
+                         <span class="glyphicon glyphicon-play"></span></a>
+                    </td>
+
                  </tr>
                  </tbody>
              </table>

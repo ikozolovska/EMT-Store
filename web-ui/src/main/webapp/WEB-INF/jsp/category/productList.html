@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/xml/ns/javaee">
 
 <head>
 
@@ -13,6 +13,9 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="../../../css/main.css" rel="stylesheet">
 
     <!-- Fonts -->
     <link href="../../../fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -34,8 +37,49 @@
             <ul class="nav nav-pills nav-stacked" th:include="fragments/sidemenu :: navpills"></ul>
         </div>
         <div class="col-sm-9">
+
+            <div class="row carousel-holder">
+
+                <div class="col-md-12">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="6"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <!--c:url var="imgUrl" value="../../../images/Sliki/Online-shop.jpg" /-->
+                                <img class="slide-image" th:src="@{../../../images/Sliki/pic1.jpg}" alt="Logo">
+                            </div>
+                            <div class="item" th:each="product : ${products}">
+                                <img class="slide-image" th:src="@{/product/{id}/picture(id=${product.identifier})}" th:alt="${product.productName}">
+                            </div>
+                            <!--div class="item">
+                                <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                            </div>
+                            <div class="item">
+                                <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                            </div-->
+                        </div>
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+
             <div class="row">
-                <div class="col-sm-3 col-lg-3 col-md-3" th:each="product : ${products}">
+                <div class="col-sm-4 col-lg-4 col-md-4" th:each="product : ${products}">
                     <div class="thumbnail">
                         <img class="img-responsive" th:src="@{/product/{id}/picture(id=${product.identifier})}" th:alt="${product.productName}">
                         <div class="caption">
@@ -50,17 +94,6 @@
                             <div th:if="${product.productAvailability == false}">
                                 <span>Out of Stock</span><span class="glyphicon glyphicon-remove"></span>
                             </div>
-                        </div>
-                        <div class="ratings">
-                            </hr>
-                            <p class="pull-right">18 reviews</p>
-                            <p>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </p>
                         </div>
                     </div>
                 </div>

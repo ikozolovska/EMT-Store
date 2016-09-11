@@ -58,3 +58,28 @@ p.credentials {
 .topbar .btn {
     border: 0;
 }
+
+#quantity_form {
+    position: relative;
+}
+
+#btn_minus {
+    position: absolute;
+    left: 0;
+}
+
+#quantity_input {
+    position: absolute;
+    width: 60%;
+    left: 43%;
+    text-align: center;
+}
+
+#btn_plus {
+    position: absolute;
+    left: 100%;
+}
+
+.slide-image {
+    margin-left: 11%;
+}
