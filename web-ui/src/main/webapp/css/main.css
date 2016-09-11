@@ -20,7 +20,7 @@ html, body {
 }
 
 body {
-    padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
+   /*  padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
 }
 
 .container > footer p {
@@ -28,7 +28,7 @@ body {
 }
 
 .container {
-    width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
+    width: 80%; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
 }
 
 /* The white background content wrapper */
@@ -80,6 +80,6 @@ p.credentials {
     left: 100%;
 }
 
-.slide-image {
-    margin-left: 11%;
+.item img {
+    margin: 0px auto;
 }
